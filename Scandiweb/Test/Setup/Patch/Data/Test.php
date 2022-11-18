@@ -21,7 +21,9 @@ use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory;
 use Magento\InventoryApi\Api\SourceItemsSaveInterface;
 use Magento\Store\Model\StoreManagerInterface;
-
+use Magento\Framework\Exception\StateException;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
+use Exception;
 
 class Test implements DataPatchInterface
 {
@@ -66,9 +68,9 @@ class Test implements DataPatchInterface
     protected array $sourceItems = [];
 
     /**
-     * @var CategoryCollectionF|CategoryCollectionFactory
+     * @var CollectionFactory|CategoryCollectionFactory
      */
-    protected CategoryCollectionF $categoryCollectionFactory;
+    protected CollectionFactory $categoryCollectionFactory;
 
     /**
      * @param ProductInterfaceFactory $productInterfaceFactory
@@ -105,7 +107,7 @@ class Test implements DataPatchInterface
 
     /**
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function apply(): void
     {
@@ -118,8 +120,8 @@ class Test implements DataPatchInterface
      * @throws InputException
      * @throws LocalizedException
      * @throws NoSuchEntityException
+     * @throws StateException
      * @throws ValidationException
-     * @throws \Magento\Framework\Exception\StateException
      */
     public function execute(): void
     {
@@ -177,3 +179,4 @@ class Test implements DataPatchInterface
         return [];
     }
 }
+
